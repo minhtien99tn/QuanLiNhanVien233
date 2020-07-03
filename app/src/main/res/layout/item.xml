@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_marginTop="20dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/itemsAnh"
+        android:layout_width="130dp"
+        android:layout_height="140dp"
+        android:background="@drawable/unnamed" />
+
+    <LinearLayout
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20sp">
+
+            <TextView
+                android:textColor="#03A9F4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="Tên"
+                android:id="@+id/itemsTenNV"
+                >
+            </TextView>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mã sinh viên"
+                android:id="@+id/itemsPhongLam"
+                >
+            </TextView>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="FaceBook"
+                android:id="@+id/itemsCongViec"
+                >
+            </TextView>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+

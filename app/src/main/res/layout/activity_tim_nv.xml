@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/unnamed"
+    tools:context=".Tim_nv">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center|top"
+        android:text="Tìm sinh viên"
+        android:textSize="50sp"
+        android:textColor="#A83E3E3E"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="12"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/bg_search"
+        >
+    <EditText
+        android:gravity="center"
+        android:layout_width="200dp"
+        android:layout_weight="12"
+        android:id="@+id/edtSearch"
+        android:textStyle="italic"
+        android:hint="Nhập tên sinh viên..."
+        android:layout_height="wrap_content"/>
+
+            <ImageButton
+                android:layout_weight="1"
+                android:id="@+id/imgSearch"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_search_black_24dp"
+                />
+
+    </LinearLayout>
+    <ListView
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/listTimNV"
+        />
+</LinearLayout>

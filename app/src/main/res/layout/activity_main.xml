@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/unnamed"
+    tools:context=".MainActivity">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:paddingTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:text="Quản Lí Nhân Viên "
+        android:textColor="#fff"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quản Lí Sinh Viên"
+            android:textColor="#000000"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            />
+
+    </LinearLayout>
+<LinearLayout
+    android:paddingLeft="90dp"
+    android:paddingRight="90dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:weightSum="2"
+    >
+
+    <LinearLayout
+        android:id="@+id/timKiem"
+        android:layout_weight="1"
+        android:layout_width="50dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/background_search"
+        android:orientation="vertical"
+
+        >
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/ic_search_black_24dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Tìm sinh viên"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:textStyle="bold"
+            android:textColor="#000" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="40dp"
+        android:layout_weight="1"
+        android:id="@+id/themNV"
+        android:layout_width="50dp"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:background="@drawable/background_search"
+        android:orientation="vertical">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/ic_add_circle_outline_black_24dp" />
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thêm Sinh Viên"
+            android:paddingRight="10dp"
+            android:paddingLeft="30dp"
+            android:textColor="#000" />
+
+
+    </LinearLayout>
+</LinearLayout>
+
+<LinearLayout
+    android:layout_marginTop="50dp"
+    android:paddingLeft="90dp"
+    android:paddingRight="90dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:weightSum="2"
+    >
+    <LinearLayout
+
+        android:id="@+id/danhSachNV"
+        android:layout_weight="1"
+        android:layout_width="50dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/background_search"
+        android:orientation="vertical"
+        >
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/ic_list_black_24dp" />
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:text="Danh sách sinh viên"
+            android:textColor="#000" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lichSu"
+        android:layout_weight="1"
+        android:layout_marginLeft="40dp"
+        android:layout_width="50dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/background_search"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/ic_youtube_searched_for_black_24dp" />
+        <TextView
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:text="Lịch sử tìm kiếm"
+            android:textColor="#000" />
+
+    </LinearLayout>
+</LinearLayout>
+
+
+
+</LinearLayout>

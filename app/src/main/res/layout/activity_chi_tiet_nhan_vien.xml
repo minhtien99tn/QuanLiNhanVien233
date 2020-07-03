@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/unnamed"
+    tools:context=".ChiTietNhanVien">
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:text="Thông tin sinh viên"
+        />
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <ImageView
+
+            android:src="@drawable/anh2"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:id="@+id/chitietImpre"
+            />
+
+        <ImageButton
+            android:id="@+id/chitietThemANh"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_collections_black_24dp" />
+
+    </LinearLayout>
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:textStyle="italic"
+        android:text="Thêm ảnh"/>
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#000"
+            android:text="Họ và tên"/>
+        <EditText
+            android:id="@+id/chitietTen"
+            android:textStyle="italic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Nguyen Van A"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#000"
+            android:text="Số điện thoại"/>
+        <EditText
+            android:id="@+id/chitietSDT"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="italic"
+            android:hint="0988488878"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#000"
+            android:text="Địa chỉ"/>
+        <EditText
+            android:id="@+id/chitietDC"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="italic"
+            android:hint="Số nhà 15"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:textColor="#000"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ngày sinh"/>
+        <EditText
+            android:textStyle="italic"
+            android:id="@+id/chitietNS"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="12/10/1999"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:textColor="#000"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Mã sinh viên"/>
+        <EditText
+            android:textStyle="italic"
+            android:id="@+id/chitietCV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="DTC17H5248 "/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:textColor="#000"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="FaceBook"/>
+        <EditText
+            android:textStyle="italic"
+            android:id="@+id/chitietPLV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="www.fb/abc"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:textColor="#000"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Giới Tính"/>
+        <RadioGroup
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/chitietNam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nam"/>
+            <RadioButton
+                android:id="@+id/chitietNu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nữ"/>
+        </RadioGroup>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:paddingRight="30dp"
+        android:paddingLeft="30dp"
+        android:orientation="horizontal">
+        <Button
+            android:textStyle="bold"
+            android:id="@+id/chitietLuu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Lưu"/>
+        <Button
+            android:textStyle="bold"
+            android:layout_marginLeft="30dp"
+            android:id="@+id/chitietNhapLai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Nhập Lại"/>
+    </LinearLayout>
+</LinearLayout>
