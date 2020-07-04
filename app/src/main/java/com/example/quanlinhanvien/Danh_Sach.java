@@ -21,7 +21,7 @@ import java.util.List;
 public class Danh_Sach extends AppCompatActivity {
     public ListView lvDanhSach;
     public ListNhanVienAdapter adapter;
-    private ArrayList<NhanVien> arrayList;
+    private List<NhanVien> arrayList;
     String table_name = "nhanvien";
     public int maNV ;
 
@@ -30,9 +30,17 @@ public class Danh_Sach extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_danh__sach);
         lvDanhSach =  findViewById(R.id.lvDanhSach);
-       loadData(table_name);
+        arrayList = new ArrayList<>();
+        adapter = new ListNhanVienAdapter(this,R.layout.item);
+        lvDanhSach.setAdapter(adapter);
        clickListView();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadData(table_name);
     }
 
     private void clickListView() {
@@ -58,7 +66,7 @@ public class Danh_Sach extends AppCompatActivity {
         btSua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Danh_Sach.this,ChiTietNhanVien.class);
+                Intent intent = new Intent(getApplicationContext(),ChiTietNhanVien.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("id",maNV1);
                 intent.putExtras(bundle);
@@ -81,7 +89,7 @@ public class Danh_Sach extends AppCompatActivity {
         btchitiet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Danh_Sach.this,Chi_tiet_sv2.class);
+                Intent intent = new Intent(getApplicationContext(),Chi_tiet_sv2.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("id",maNV1);
                 intent.putExtras(bundle);
@@ -102,12 +110,10 @@ public class Danh_Sach extends AppCompatActivity {
     }
 
     private void loadData(String table_name) {
-
         Database_NV database_nv = new Database_NV(this);
-        arrayList  =  database_nv.getAllNhanVien(table_name);
-        Log.e("id",String.valueOf( arrayList.get(0).getMaNV()));
-        adapter = new ListNhanVienAdapter(this,R.layout.item,arrayList);
-        lvDanhSach.setAdapter(adapter);
+        database_nv.getAllNhanVien(table_name, arrayList);
+        Log.e("LOG", "cnt: "+arrayList.size());
+        adapter.addAllStudent(arrayList);
         database_nv.close();
     }
 }

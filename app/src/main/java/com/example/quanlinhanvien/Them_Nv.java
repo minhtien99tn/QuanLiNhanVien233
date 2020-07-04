@@ -3,6 +3,7 @@ package com.example.quanlinhanvien;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -11,6 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -34,13 +36,17 @@ public class Them_Nv extends AppCompatActivity {
     Button butNhapLai, butNhap;
     ImageButton btThemANh;
     ImageView impre;
+    String imgSelected = "";
     final  int REQUEST_CHOOSE_PHOTO = 321;
     Database_NV database_nv;
     String table_name = "nhanvien";
+    Context mContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_them__nv);
+        mContext = this;
+        imgSelected = "";
         anhXa();
         database_nv = new Database_NV(this);
         Event();
@@ -64,8 +70,9 @@ public class Them_Nv extends AppCompatActivity {
             Uri uri = data.getData();
             try {
                 InputStream inputStream = getContentResolver().openInputStream(uri);
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                impre.setImageBitmap(bitmap);
+                imgSelected = Utility.copyImageToCache(mContext, inputStream);
+                Bitmap img = BitmapFactory.decodeStream(inputStream);
+                impre.setImageBitmap(img);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -117,11 +124,10 @@ public class Them_Nv extends AppCompatActivity {
 
 //                byte[] anh = getByteArrayFromImageView(impre);
 
-                BitmapDrawable bitmapDrawable = (BitmapDrawable) impre.getDrawable();
-                Bitmap bitmap = bitmapDrawable.getBitmap();
-                ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArray);
-                byte[] anh = byteArray.toByteArray();
+                if (TextUtils.isEmpty(imgSelected)){
+                    imgSelected = "anh2.PNG";
+                    Utility.copyDrawableToCache(mContext, mContext.getResources().getDrawable(R.drawable.anh2), imgSelected);
+                }
 
                 if (radNam.isChecked() == true)
                     gt = 1;
@@ -129,9 +135,10 @@ public class Them_Nv extends AppCompatActivity {
                 if (tenNV.equals("")) {
                     editTen.setError("Vui lòng nhập dữ liệu!");
                 } else {
-                    NhanVien nv = new NhanVien(tenNV, SDT, diaChi, ngaySinh, congViec, phongLam, gt, anh);
-                    database_nv.themNhanVien(nv);
+                    NhanVien nv = new NhanVien(tenNV, SDT, diaChi, ngaySinh, congViec, phongLam, gt, imgSelected);
+                    database_nv.themNhanVien(nv, table_name);
                     database_nv.close();
+                    imgSelected = "";
                     Toast.makeText(Them_Nv.this, "Đã thêm sinh viên", Toast.LENGTH_SHORT).show();
                 }
             }

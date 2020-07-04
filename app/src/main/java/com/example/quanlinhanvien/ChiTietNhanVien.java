@@ -10,6 +10,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,40 +34,37 @@ public class ChiTietNhanVien extends AppCompatActivity {
     ImageView imv;
     ImageButton chitietThemAnh;
     int id;
+    NhanVien mNhanVien;
+    String imgSelected = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chi_tiet_nhan_vien);
         connect();
         // lấy id từ danh sách
-        SQLiteDatabase db = openOrCreateDatabase("QUANLYNHANVIEN.db", MODE_PRIVATE, null);
-        String sql = " CREATE TABLE IF NOT EXISTS lichsu(ID INTEGER PRIMARY KEY AUTOINCREMENT,  TEN TEXT,SDT TEXT," +
-                " DIACHI TEXT, NGAYSINH TEXT, CONGVIEC TEXT, PHONG TEXT,GIOITINH INTEGER , ANH BLOB )";
-        db.execSQL(sql);
-        db.close();
         getDataFromDanhSach();
         themAnh();
         setText();
         click();
-
+        imgSelected = "";
 
     }
 
     private void setText() {
         Database_NV database_nv = new Database_NV(ChiTietNhanVien.this);
-        NhanVien nv = database_nv.nhanVien(id);
-        ten.setText(nv.getTenNV());
-        sdt.setText(nv.getSdt());
-        ngaysinh.setText(nv.getNgaysinh());
-        diachi.setText(nv.getDiaChi());
-        congviec.setText(nv.getCongviec());
-        plamviec.setText(nv.getPhonglam());
+        mNhanVien = database_nv.nhanVien(id);
+        ten.setText(mNhanVien.getTenNV());
+        sdt.setText(mNhanVien.getSdt());
+        ngaysinh.setText(mNhanVien.getNgaysinh());
+        diachi.setText(mNhanVien.getDiaChi());
+        congviec.setText(mNhanVien.getCongviec());
+        plamviec.setText(mNhanVien.getPhonglam());
 
-        byte[] t = nv.getAnh();
-        Bitmap bp= BitmapFactory.decodeByteArray(t, 0, t.length);
+
+        Bitmap bp= Utility.getBitmap(getApplicationContext(), mNhanVien.getAnh());
         imv.setImageBitmap(bp);
 
-        if (nv.getGioitinh()==0)
+        if (mNhanVien.getGioitinh()==0)
         {
             rdNu.setChecked(true);
         }
@@ -98,25 +97,17 @@ public class ChiTietNhanVien extends AppCompatActivity {
                 String diaChi = diachi.getText().toString();
                 String SDT = sdt.getText().toString();
                 String congViec = congviec.getText().toString();
-
-
-                BitmapDrawable bitmapDrawable = (BitmapDrawable) imv.getDrawable();
-
-                Bitmap bitmap = bitmapDrawable.getBitmap();
-                ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArray);
-
-                byte[] anh = byteArray.toByteArray();
-//                if( imv == null){
-//                    imv.setBackgroundResource(R.drawable.man);
-//                }
-
                 if(rdNu.isChecked()==true)
                 {
                     gt =0;
                 }
+                if (TextUtils.isEmpty(imgSelected)){
+                    imgSelected = mNhanVien.getAnh();
+                } else {
+                    Utility.deleteImage(getApplicationContext(), mNhanVien.getAnh());
+                }
               //  Log.e("Ten",tenNV);
-                NhanVien nv = new NhanVien(tenNV,SDT,diaChi,ngaySinh,congViec,phongLam,gt,anh);
+                NhanVien nv = new NhanVien(tenNV,SDT,diaChi,ngaySinh,congViec,phongLam,gt,imgSelected);
                 database_nv.update(id,nv);
                 database_nv.close();
                 Toast.makeText(ChiTietNhanVien.this,"Đã lưu!",Toast.LENGTH_SHORT).show();
@@ -126,12 +117,12 @@ public class ChiTietNhanVien extends AppCompatActivity {
          nhaplai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sdt.setText("");
-                ten.setText("");
-                congviec.setText("");
-                diachi.setText("");
-                ngaysinh.setText("");
-                plamviec.setText("");
+                ten.setText(mNhanVien.getTenNV());
+                sdt.setText(mNhanVien.getSdt());
+                ngaysinh.setText(mNhanVien.getNgaysinh());
+                diachi.setText(mNhanVien.getDiaChi());
+                congviec.setText(mNhanVien.getCongviec());
+                plamviec.setText(mNhanVien.getPhonglam());
                 rdNam.setChecked(false);
                 rdNu.setChecked(false);
             }
@@ -187,6 +178,7 @@ public class ChiTietNhanVien extends AppCompatActivity {
             Uri uri = data.getData();
             try {
                 InputStream inputStream = getContentResolver().openInputStream(uri);
+                imgSelected = Utility.copyImageToCache(getApplicationContext(), inputStream);
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 imv.setImageBitmap(bitmap);
             } catch (FileNotFoundException e) {

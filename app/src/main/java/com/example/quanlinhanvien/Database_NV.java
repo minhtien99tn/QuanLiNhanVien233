@@ -33,23 +33,39 @@ public class Database_NV extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-            String sql = " CREATE TABLE IF NOT EXISTS nhanvien(ID INTEGER PRIMARY KEY AUTOINCREMENT,  TEN TEXT,SDT TEXT,DIACHI TEXT, NGAYSINH TEXT, CONGVIEC TEXT, PHONG TEXT,GIOITINH TEXT, ANH BLOB )";
+            String sql = " CREATE TABLE IF NOT EXISTS nhanvien(ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "TEN TEXT, " +
+                    "SDT TEXT, " +
+                    "DIACHI TEXT, " +
+                    "NGAYSINH TEXT, " +
+                    "CONGVIEC TEXT, " +
+                    "PHONG TEXT, " +
+                    "GIOITINH INTEGER, " +
+                    "ANH TEXT)";
         sqLiteDatabase.execSQL(sql);
-        String sql1 = " CREATE TABLE IF NOT EXISTS lichsu(ID INTEGER PRIMARY KEY AUTOINCREMENT,  TEN TEXT,SDT TEXT,DIACHI TEXT, NGAYSINH TEXT, CONGVIEC TEXT, PHONG TEXT,GIOITINH TEXT, ANH BLOB )";
+        String sql1 = " CREATE TABLE IF NOT EXISTS lichsu(ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "TEN TEXT, " +
+                "SDT TEXT, " +
+                "DIACHI TEXT, " +
+                "NGAYSINH TEXT, " +
+                "CONGVIEC TEXT, " +
+                "PHONG TEXT, " +
+                "GIOITINH INTEGER, " +
+                "ANH TEXT)";
         sqLiteDatabase.execSQL(sql1);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
     }
-    public void themNhanVien(NhanVien mNhanVien){
+    public void themNhanVien(NhanVien mNhanVien, String table){
         SQLiteDatabase database = this.getWritableDatabase();
 
-        String sql = "INSERT INTO nhanvien VALUES(null,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO "+table+" VALUES(null,?,?,?,?,?,?,?,?)";
         SQLiteStatement stm = database.compileStatement(sql);
         stm.clearBindings();
 
-        stm.bindBlob(8,mNhanVien.getAnh());
+        stm.bindString(8,mNhanVien.getAnh());
         stm.bindString(7, String.valueOf(mNhanVien.getGioitinh()));
         stm.bindString(6,mNhanVien.getPhonglam());
         stm.bindString(5,mNhanVien.getCongviec());
@@ -61,15 +77,15 @@ public class Database_NV extends SQLiteOpenHelper {
         database.close();
     }
 
-
-    public ArrayList<NhanVien> getAllNhanVien(String table_name) {
-        ArrayList<NhanVien>  studentList = new ArrayList<>();
+    public void getAllNhanVien(String table_name, List<NhanVien> studentList) {
+        studentList.clear();
         String query = "SELECT * FROM " + table_name;
         Log.e("tb",table_name);
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         NhanVien nhanVien;
         if(cursor!=null && cursor.moveToFirst()) {
+            Log.e("log", "cnt: "+cursor.getCount() + " colum"+cursor.getColumnCount());
             do{
                 nhanVien = new NhanVien(
                         cursor.getInt(0),
@@ -80,7 +96,7 @@ public class Database_NV extends SQLiteOpenHelper {
                         cursor.getString(5),
                         cursor.getString(6),
                         cursor.getInt(7),
-                        cursor.getBlob(8)
+                        cursor.getString(8)
                 );
                 studentList.add(nhanVien);
             }
@@ -88,21 +104,20 @@ public class Database_NV extends SQLiteOpenHelper {
             while (cursor.moveToNext());
         }
         cursor.close();
-        return studentList;
     }
 // tìm kiếm danh sách những nhân viên có tên gần giống
-    public ArrayList<NhanVien> Search_NV(String search)
+    public List<NhanVien> Search_NV(String search)
     {
-        ArrayList<NhanVien>  arrayList = new ArrayList<>();
+        List<NhanVien>  arrayList = new ArrayList<>();
         search.trim();
         String query = "SELECT * FROM " + TABLE_NAME +" WHERE TEN LIKE '%"+search+"%'";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
-        if (cursor!=null)
+        if (cursor!=null && cursor.moveToFirst())
         {
-            while(cursor.moveToNext()) {
+            do{
                 NhanVien nhanVien = new NhanVien(cursor.getInt(0),
                         cursor.getString(1),
                         cursor.getString(2),
@@ -111,11 +126,11 @@ public class Database_NV extends SQLiteOpenHelper {
                         cursor.getString(5),
                         cursor.getString(6),
                         cursor.getInt(7),
-                        cursor.getBlob(8)
+                        cursor.getString(8)
                 );
                 //trả lại 1 mảng danh sách
                 arrayList.add(nhanVien);
-            }
+            }while(cursor.moveToNext());
         }
         cursor.close();
         return arrayList;
@@ -138,7 +153,7 @@ public class Database_NV extends SQLiteOpenHelper {
                     cursor.getString(5),
                     cursor.getString(6),
                     cursor.getInt(7),
-                        cursor.getBlob(8)
+                        cursor.getString(8)
             );
         }
         return nhanVien;
@@ -154,7 +169,7 @@ public class Database_NV extends SQLiteOpenHelper {
         String congviec = mNhanVien.getCongviec();
         String phong = mNhanVien.getPhonglam();
         Integer gioitinh =mNhanVien.getGioitinh();
-        byte[] anh = mNhanVien.getAnh();
+        String anh = mNhanVien.getAnh();
 
        String sql = "UPDATE  nhanvien SET TEN = '"+ten+"', SDT ='"+sdt+"'  ,DIACHI = '"+diachi+"' , NGAYSINH = '"+ngaysinh+"' ," +
                "CONGVIEC= '"+congviec+"', PHONG ='"+phong+"' ,GIOITINH = '"+gioitinh+"' , ANH ='"+anh+"' WHERE ID = '"+id+"'";

@@ -3,6 +3,7 @@ package com.example.quanlinhanvien;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +17,19 @@ import java.util.List;
 public class ListNhanVienAdapter extends BaseAdapter {
     Context myContext;
     int myLayout;
-    ArrayList<NhanVien> nhanVienList;
+    List<NhanVien> nhanVienList;
 
-    public ListNhanVienAdapter(Context context, int myLayout, ArrayList<NhanVien> nhanViens) {
+    public ListNhanVienAdapter(Context context, int myLayout) {
         this.myContext = context;
         this.myLayout = myLayout;
-        this.nhanVienList = nhanViens;
+        this.nhanVienList = new ArrayList<>();
+    }
+
+    public void addAllStudent(List<NhanVien> list){
+        nhanVienList.clear();
+        Log.e("log", "cnt "+list.size());
+        nhanVienList.addAll(list);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -70,8 +78,7 @@ public class ListNhanVienAdapter extends BaseAdapter {
         holder.tenNV.setText(nv.getTenNV());
         holder.PhongLam.setText(nv.getPhonglam());
         holder.CongViec.setText(nv.getCongviec());
-        byte[] t = nv.getAnh();
-        Bitmap bp= BitmapFactory.decodeByteArray(t, 0, t.length);
+        Bitmap bp= Utility.getBitmap(myContext, nv.getAnh());
         holder.AnhNV.setImageBitmap(bp);
 
 

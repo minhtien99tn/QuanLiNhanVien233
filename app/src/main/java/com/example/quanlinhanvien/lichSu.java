@@ -14,12 +14,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class lichSu extends AppCompatActivity {
 
     LinearLayout xoalichsu;
     ListView lvLichSu;
-    ArrayList arrayList ;
+    List<NhanVien> arrayList ;
     ListNhanVienAdapter adapter;
     String table_name = "lichsu";
     @Override
@@ -29,6 +30,9 @@ public class lichSu extends AppCompatActivity {
 
         lvLichSu = (ListView) findViewById(R.id.lvLichsu);
         xoalichsu = (LinearLayout) findViewById(R.id.xoatatca);
+        arrayList = new ArrayList<>();
+        adapter = new ListNhanVienAdapter(this,R.layout.item);
+        lvLichSu.setAdapter(adapter);
         loadData();
         xoalichsu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,14 +72,10 @@ public class lichSu extends AppCompatActivity {
     }
 
     private void loadData() {
-        arrayList = new ArrayList<>();
-
         Database_NV database_nv = new Database_NV(this);
 
-        arrayList  = (ArrayList) database_nv.getAllNhanVien(table_name);
-
-        adapter = new ListNhanVienAdapter(this,R.layout.item,arrayList);
-        lvLichSu.setAdapter(adapter);
+        database_nv.getAllNhanVien(table_name, arrayList);
+        adapter.addAllStudent(arrayList);
         database_nv.close();
     }
 

@@ -151,13 +151,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="FaceBook"/>
-        <EditText
+        <TextView
             android:textStyle="italic"
             android:id="@+id/chitietPLV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="www.fb/abc"/>
+            />
     </LinearLayout>
     <LinearLayout
         android:layout_marginLeft="20dp"

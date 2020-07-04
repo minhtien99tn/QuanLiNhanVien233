@@ -9,9 +9,9 @@ public class NhanVien {
     public String congviec;
     public String phonglam;
     public int gioitinh;
-    public byte[] anh;
+    public String anh;
 
-    public NhanVien(int maNV, String tenNV, String diaChi, String ngaysinh, String sdt, String congviec, String phonglam, int gioitinh, byte[] anh) {
+    public NhanVien(int maNV, String tenNV, String diaChi, String ngaysinh, String sdt, String congviec, String phonglam, int gioitinh, String anh) {
         this.maNV = maNV;
         this.tenNV = tenNV;
         this.diaChi = diaChi;
@@ -23,7 +23,7 @@ public class NhanVien {
         this.anh = anh;
     }
 
-    public NhanVien(String tenNV, String diaChi, String ngaysinh, String sdt, String congviec, String phonglam, int gioitinh, byte[] anh) {
+    public NhanVien(String tenNV, String diaChi, String ngaysinh, String sdt, String congviec, String phonglam, int gioitinh, String anh) {
         this.tenNV = tenNV;
         this.diaChi = diaChi;
         this.ngaysinh = ngaysinh;
@@ -98,11 +98,11 @@ public class NhanVien {
         this.gioitinh = gioitinh;
     }
 
-    public byte[] getAnh() {
+    public String getAnh() {
         return anh;
     }
 
-    public void setAnh(byte[] anh) {
+    public void setAnh(String anh) {
         this.anh = anh;
     }
 }

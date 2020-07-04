@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Tim_nv extends AppCompatActivity {
 
@@ -20,7 +21,7 @@ public class Tim_nv extends AppCompatActivity {
     public ImageButton imgSearch;
     public String search;
     public ListView lvDanhSach;
-    public ArrayList<NhanVien> arrayList;
+    public List<NhanVien> arrayList;
     public ListNhanVienAdapter adapter;
 
     @Override
@@ -32,6 +33,9 @@ public class Tim_nv extends AppCompatActivity {
         getSearch =  findViewById(R.id.edtSearch);
         imgSearch =  findViewById(R.id.imgSearch);
 
+        arrayList = new ArrayList<>();
+        adapter = new ListNhanVienAdapter(Tim_nv.this,R.layout.item);
+        lvDanhSach.setAdapter(adapter);
         Search();
         clickListView();
     }
@@ -68,9 +72,10 @@ public class Tim_nv extends AppCompatActivity {
         arrayList = new ArrayList<>();
 
         arrayList = database_nv.Search_NV(search);
-
-        adapter = new ListNhanVienAdapter(Tim_nv.this,R.layout.item,arrayList);
-        lvDanhSach.setAdapter(adapter);
+        adapter.addAllStudent(arrayList);
+        for (NhanVien nv: arrayList) {
+            database_nv.themNhanVien(nv, "lichsu");
+        }
         database_nv.close();
     }
 }

@@ -2,46 +2,47 @@ package com.example.quanlinhanvien;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 
 public class Chi_tiet_sv2 extends AppCompatActivity {
-        EditText ten,sdt,ngaysinh,diachi,congviec,plamviec;
+        TextView ten,sdt,ngaysinh,diachi,congviec;
+        TextView plamviec;
         RadioButton rdNam,rdNu;
        // Button luu,nhaplai;
         String table_name = "lichsu";
         ImageView imv;
         int id;
+        Context mContext;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_chi_tiet_sv2);
+            mContext = this;
             connect();
             // lấy id từ danh sách
-            SQLiteDatabase db = openOrCreateDatabase("QUANLYNHANVIEN.db", MODE_PRIVATE, null);
-            String sql = " CREATE TABLE IF NOT EXISTS lichsu(ID INTEGER PRIMARY KEY AUTOINCREMENT,  TEN TEXT,SDT TEXT," +
-                    " DIACHI TEXT, NGAYSINH TEXT, CONGVIEC TEXT, PHONG TEXT,GIOITINH INTEGER , ANH BLOB )";
-            db.execSQL(sql);
-            db.close();
             getDataFromDanhSach();
             setText();
 
         }
 
         private void setText() {
-            Database_NV database_nv = new Database_NV(com.example.quanlinhanvien.Chi_tiet_sv2.this);
+            Database_NV database_nv = new Database_NV(mContext);
             NhanVien nv = database_nv.nhanVien(id);
             ten.setText(nv.getTenNV());
             sdt.setText(nv.getSdt());
@@ -49,8 +50,8 @@ public class Chi_tiet_sv2 extends AppCompatActivity {
             diachi.setText(nv.getDiaChi());
             congviec.setText(nv.getCongviec());
             plamviec.setText(nv.getPhonglam());
-            byte[] t = nv.getAnh();
-            Bitmap bp= BitmapFactory.decodeByteArray(t, 0, t.length);
+            Linkify.addLinks(plamviec,Linkify.WEB_URLS);
+            Bitmap bp= Utility.getBitmap(mContext, nv.getAnh());
             imv.setImageBitmap(bp);
             if (nv.getGioitinh()==0)
             {
@@ -74,15 +75,15 @@ public class Chi_tiet_sv2 extends AppCompatActivity {
         }
 
         private void connect() {
-            ten = (EditText) findViewById(R.id.chitietTen);
+            ten = findViewById(R.id.chitietTen);
 
-            sdt = (EditText) findViewById(R.id.chitietSDT);
-            ngaysinh = (EditText) findViewById(R.id.chitietNS);
+            sdt = findViewById(R.id.chitietSDT);
+            ngaysinh =  findViewById(R.id.chitietNS);
 
-            diachi = (EditText) findViewById(R.id.chitietDC);
+            diachi = findViewById(R.id.chitietDC);
 
-            congviec = (EditText) findViewById(R.id.chitietCV);
-            plamviec = (EditText) findViewById(R.id.chitietPLV);
+            congviec =  findViewById(R.id.chitietCV);
+            plamviec =  findViewById(R.id.chitietPLV);
 
             rdNam = (RadioButton) findViewById(R.id.chitietNam);
             rdNu = (RadioButton) findViewById(R.id.chitietNu);
