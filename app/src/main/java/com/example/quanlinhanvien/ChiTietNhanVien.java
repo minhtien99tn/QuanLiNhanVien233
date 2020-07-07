@@ -167,7 +167,7 @@ public class ChiTietNhanVien extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 startActivityForResult(intent, REQUEST_CODE_FOLDER);
-                Toast.makeText(ChiTietNhanVien.this,"Theemmm",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChiTietNhanVien.this,"Thêm Thành Công",Toast.LENGTH_SHORT).show();
             }
         });
 

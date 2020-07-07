@@ -70,9 +70,9 @@ public class Them_Nv extends AppCompatActivity {
             Uri uri = data.getData();
             try {
                 InputStream inputStream = getContentResolver().openInputStream(uri);
-                imgSelected = Utility.copyImageToCache(mContext, inputStream);
                 Bitmap img = BitmapFactory.decodeStream(inputStream);
                 impre.setImageBitmap(img);
+                imgSelected = Utility.copyImageToCache(mContext, inputStream);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

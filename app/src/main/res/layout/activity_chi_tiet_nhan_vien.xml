@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/unnamed"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
+    android:paddingTop="30dp"
+    android:background="@drawable/anh4"
     tools:context=".ChiTietNhanVien">
     <TextView
         android:layout_marginTop="20dp"
@@ -18,11 +21,18 @@
         android:textStyle="bold"
         android:text="Thông tin sinh viên"
         />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
     <LinearLayout
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         >
         <ImageView
 
@@ -220,4 +230,6 @@
             android:layout_weight="1"
             android:text="Nhập Lại"/>
     </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

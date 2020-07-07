@@ -34,6 +34,7 @@ public class lichSu extends AppCompatActivity {
         adapter = new ListNhanVienAdapter(this,R.layout.item);
         lvLichSu.setAdapter(adapter);
         loadData();
+        adapter.notifyDataSetChanged();
         xoalichsu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,9 +74,9 @@ public class lichSu extends AppCompatActivity {
 
     private void loadData() {
         Database_NV database_nv = new Database_NV(this);
-
         database_nv.getAllNhanVien(table_name, arrayList);
         adapter.addAllStudent(arrayList);
+        adapter.notifyDataSetChanged();
         database_nv.close();
     }
 

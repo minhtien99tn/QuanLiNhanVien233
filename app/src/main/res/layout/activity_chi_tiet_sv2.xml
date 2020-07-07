@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/unnamed"
+    android:background="@drawable/anh4"
     tools:context=".ChiTietNhanVien">
     <TextView
         android:layout_marginTop="20dp"
